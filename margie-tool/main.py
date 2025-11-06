@@ -11,7 +11,7 @@ from typing import Optional, Generator, Tuple
 from pydantic import BaseModel, Field
 import yaml
 
-from bioinformatics_tools.FileClasses.Fasta import Fasta
+from bioinformatics_tools.file_classes.Fasta import Fasta
 
 def get_fasta_files(inputs):
     """Expand directories and collect all FASTA files."""
@@ -103,7 +103,6 @@ def main():
         workflow_config_defaults = margie_config.get('config', {})
 
     print(f'Step 3.5: Loaded default config from {margie_config}')
-
 
     # ------------- Step 4: Generating sample names from FASTA files ------------- #
     samples = []

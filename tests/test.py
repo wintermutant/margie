@@ -1,6 +1,6 @@
 import os
 import tempfile
-from bioinformatics_tools.FileClasses.Fasta import Fasta
+from bioinformatics_tools.file_classes.Fasta import Fasta
 
 def create_test_fasta():
     """Create a small test FASTA file with 2 entries."""

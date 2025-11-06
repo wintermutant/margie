@@ -11,8 +11,7 @@ from typing import Optional, Generator, Tuple
 from pydantic import BaseModel, Field
 import yaml
 
-from bioinformatics_tools.FileClasses.Fasta import Fasta
-
+from bioinformatics_tools.file_classes.Fasta import Fasta
 
 def get_fasta_files(inputs):
     """Expand directories and collect all FASTA files."""
@@ -105,7 +104,6 @@ def main():
 
     print(f'Step 3.5: Loaded default config from {margie_config}')
 
-
     # ------------- Step 4: Generating sample names from FASTA files ------------- #
     samples = []
     for fasta_file in valid_files:
@@ -118,8 +116,9 @@ def main():
     output_dir = workflow_config_defaults.get('output_dir', 'output')
     for sample in samples:
         # if 'make_db' in rules_to_run:
-        if True:
-            targets.append(f"{output_dir}/{sample}.db")
+        if True:  #TODO: Make this dynanmic based on the CLI
+            # targets.append(f"{output_dir}/{sample}.db")
+            targets.append(f"{output_dir}/annotations/agg/{sample}.gff")
     print(f'\nStep 5: Target files to be generated: {targets}')
 
     # Create sample to file mapping
@@ -160,6 +159,8 @@ def main():
 
     # ---------------------- Step 8: Run the actual command ---------------------- #
     result = subprocess.run(cmd, capture_output=True, text=True, cwd=Path(__file__).parent)
+    print(f'Snakemake stdout:\n{result.stdout}')
+    print(f'Snakemake stderr:\n{result.stderr}')
 
     if result.returncode == 0:
         print("Snakemake pipeline completed successfully!")

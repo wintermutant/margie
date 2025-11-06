@@ -32,6 +32,7 @@ mypy = ">=1.0"
 scipy = ">=1.9"
 matplotlib = ">=3.5"
 seaborn = ">=0.11"
+pydantic-sqlite = ">=0.4.0, <0.5"
 
 [tasks]
 install = "pip install -e ."

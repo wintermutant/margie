@@ -56,3 +56,5 @@ python fasta.py -i raw-fastas/*.fasta
 
 pass
 
+## Contributors:
+- Dane Deemer: Lead developer

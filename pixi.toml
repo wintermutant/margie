@@ -15,6 +15,9 @@ pydantic = ">=2.0"
 [pypi-dependencies]
 bioinformatics_tools = { path = "../bioinformatics-tools", editable = true }
 
+# Documentation
+sphinx = ">=7.0"
+
 # Bioinformatics tools for genome annotation
 biopython = ">=1.80"
 pandas = ">=1.5"
@@ -50,3 +53,15 @@ description = "Run the FASTA to SQLite converter"
 [tasks.setup-db]
 cmd = "mkdir -p database && echo 'Database directory ready'"
 description = "Set up database directory"
+
+[tasks.docs]
+cmd = "cd docs && sphinx-build -b html . _build/html"
+description = "Build Sphinx documentation"
+
+[tasks.docs-clean]
+cmd = "rm -rf docs/_build"
+description = "Clean documentation build artifacts"
+
+[tasks.docs-serve]
+cmd = "cd docs/_build/html && python -m http.server 8000"
+description = "Serve documentation locally at http://localhost:8000"

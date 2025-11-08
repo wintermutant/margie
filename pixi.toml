@@ -14,6 +14,7 @@ pydantic = ">=2.0"
 # Local bioinformatics tools library
 [pypi-dependencies]
 bioinformatics_tools = { path = "../bioinformatics-tools", editable = true }
+margie = { path = ".", editable = true }
 
 # Documentation
 sphinx = ">=7.0"
@@ -23,6 +24,7 @@ biopython = ">=1.80"
 pandas = ">=1.5"
 numpy = ">=1.20"
 snakemake = ">=9.0"
+pyyaml = ">=6.0"
 
 # Development and testing
 pytest = ">=7.0"

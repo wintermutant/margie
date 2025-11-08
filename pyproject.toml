@@ -1,0 +1,149 @@
+[build-system]
+requires = ["setuptools>=65.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "margie"
+version = "0.1.0"
+description = "Mostly Automated Rapid Genome Inference Environment - A rapid genome annotation pipeline"
+readme = "README.md"
+requires-python = ">=3.9,<3.12"
+license = {text = "MIT"}
+authors = [
+    {name = "Dane Deemer", email = "daned@purdue.edu"}
+]
+keywords = [
+    "bioinformatics",
+    "genomics",
+    "annotation",
+    "metagenomics",
+    "snakemake",
+    "pipeline"
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+
+# Core dependencies
+dependencies = [
+    "pydantic>=2.0",
+    "biopython>=1.80",
+    "pandas>=1.5",
+    "numpy>=1.20",
+    "snakemake>=9.0",
+    "pydantic-sqlite>=0.4.0,<0.5",
+    "scipy>=1.9",
+    "matplotlib>=3.5",
+    "seaborn>=0.11",
+    "pyyaml>=6.0",
+    # NOTE: bioinformatics-tools is installed as editable via pixi.toml for local dev
+    # Uncomment when bioinformatics-tools is published to PyPI:
+    # "bioinformatics-tools>=0.2.0",
+]
+
+[project.optional-dependencies]
+# Development dependencies
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "black>=23.0",
+    "ruff>=0.1",
+    "mypy>=1.0",
+]
+
+# Documentation dependencies
+docs = [
+    "sphinx>=7.0",
+]
+
+# All optional dependencies
+all = [
+    "margie[dev,docs]",
+]
+
+[project.urls]
+Homepage = "https://github.com/Diet-Microbiome-Interactions-Lab/margie"
+Documentation = "https://margie.readthedocs.io"
+Repository = "https://github.com/Diet-Microbiome-Interactions-Lab/margie"
+"Bug Tracker" = "https://github.com/Diet-Microbiome-Interactions-Lab/margie/issues"
+
+[project.scripts]
+# CLI entry points - update these as you develop the CLI
+margie = "margie.main:main"
+
+[tool.setuptools]
+packages = ["margie"]
+
+[tool.setuptools.package-dir]
+margie = "margie-tool"
+
+[tool.setuptools.package-data]
+margie = [
+    "*.smk",
+    "profiles/**/*",
+    "*.yaml",
+]
+
+# Black configuration
+[tool.black]
+line-length = 100
+target-version = ['py39', 'py310', 'py311']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.venv
+  | \.pixi
+  | _build
+  | dist
+  | \.snakemake
+)/
+'''
+
+# Ruff configuration
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+exclude = [
+    ".git",
+    ".venv",
+    ".pixi",
+    "_build",
+    "dist",
+    ".snakemake",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+]
+ignore = [
+    "E501",  # line too long (handled by black)
+]
+
+# Pytest configuration
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = "-v --strict-markers"
+
+# MyPy configuration
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true

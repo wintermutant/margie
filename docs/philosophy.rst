@@ -1,4 +1,4 @@
-Philosophy & Design Principles
+Philosophy & Design
 ==============================
 
 This section outlines the guiding principles and philosophy behind margie's design and development. Much of this section
